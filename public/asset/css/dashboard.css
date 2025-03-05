@@ -1,0 +1,27 @@
+body {
+    display: flex;
+}
+.sidebar {
+    width: 250px;
+    height: 2000px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: #f8f9fa;
+    padding-top: 56px; /* Adjusted for navbar height */
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+}
+.content-wrapper {
+    margin-left: 250px;
+    width: calc(100% - 250px);
+    padding: 20px;
+}
+.navbar {
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+}
+.main-content {
+    padding-top: 60px; /* Adjusted for fixed navbar */
+}
