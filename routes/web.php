@@ -3,6 +3,7 @@
 use App\Http\Controllers\SuperAdmin\DashboardController as SuperDashboardController;
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\SuperAdmin\ProductController;
+use App\Http\Controllers\SuperAdmin\UserController;
 use App\Http\Controllers\User\DashboardController as UserDashboardController;
 use App\Models\Product;
 use App\Http\Controllers\HomeController;
@@ -42,6 +43,14 @@ Route::prefix('super-admin')->as('super.')->middleware(['super_admin'])->group(f
         Route::get('/edit/{id}', [ProductController::class, 'edit'])->name('edit');
         Route::put('/update/{id}', [ProductController::class, 'update'])->name('update');
         Route::delete('/delete/{id}', [ProductController::class, 'delete'])->name('delete');
+    });
+
+    Route::prefix('users')->as('user.')->group(function () {
+        Route::get('/', [UserController::class, 'index'])->name('index');
+        Route::post('/create', [UserController::class, 'create'])->name('create');
+        Route::get('/edit/{id}', [UserController::class, 'edit'])->name('edit');
+        Route::put('/update/{id}', [UserController::class, 'update'])->name('update');
+        Route::delete('/delete/{id}', [UserController::class, 'delete'])->name('delete');
     });
 });
 Route::prefix('admin')->as('admin.')->middleware(['admin'])->group(function () {
