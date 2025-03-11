@@ -42,8 +42,10 @@ class HomeController extends Controller
     }
 
 
-    public function showProduct($id){
-        $product = Product::with('images','primaryImage')->find($id);
-        return view('products.show',compact('product'));
+
+    public function showProduct(Product $product)
+    {
+       $product = $product->load(['images','primaryImage']);
+       return view('products.show',compact('product'));
     }
 }

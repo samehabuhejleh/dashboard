@@ -49,4 +49,8 @@ class User extends Authenticatable implements LaratrustUser
         return $this->morphOne(Image::class,'imageable')->where('is_main', true);
     }
 
+    public function cart(){
+        return $this->hasOne(Cart::class);
+    }
+
 }

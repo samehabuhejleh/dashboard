@@ -7,6 +7,7 @@ use App\Http\Controllers\SuperAdmin\UserController;
 use App\Http\Controllers\User\DashboardController as UserDashboardController;
 use App\Models\Product;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\CartController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -24,8 +25,12 @@ use Illuminate\Support\Facades\Auth;
 Route::get('/',[HomeController::class,'welcome'])->name('welcome');
 
 Route::middleware('auth')->group(function(){
-Route::get('/product/{id}',[HomeController::class,'showProduct'])->name('show');
 
+    Route::get('/products/{product}', [HomeController::class, 'showProduct'])->name('products.show');
+    Route::post('/cart/add', [CartController::class, 'AddToCart'])->name('cart.add');
+    Route::get('/cart', [CartController::class, 'viewCart'])->name('cart.index');
+    Route::delete('/cart/delete/{id}', [CartController::class, 'deleteItem'])->name('cart.delete');
+    
 });
 
 Auth::routes();
@@ -59,3 +64,5 @@ Route::prefix('admin')->as('admin.')->middleware(['admin'])->group(function () {
 Route::prefix('user')->as('user.')->middleware(['user'])->group(function () {
     Route::get('/index', [UserDashboardController::class, 'index'])->name('index');
 });
+
+

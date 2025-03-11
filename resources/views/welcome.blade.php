@@ -10,7 +10,7 @@
                 <p class="card-text">{{$product->description}}</p>
                 <p class="card-text">$ {{$product->price}}</p>
                 <p class="card-text">{{$product->stock}}</p>
-                <a href="{{route('show',$product->id)}}" class="btn btn-primary">show details</details></a>
+                <a href="{{route('products.show',$product->id)}}" class="btn btn-primary">show details</details></a>
             </div>
         </div>
         @endforeach

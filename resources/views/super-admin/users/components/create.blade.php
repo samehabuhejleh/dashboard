@@ -15,21 +15,29 @@
                             <input type="text" class="form-control" id="name" name="name">
                         </div>
                         <div class="form-group">
-                            <label  class="form-label" for="email">Email</label>
-                            <input type="email"  class="form-control" id="email" name="email">
+                            <label class="form-label" for="email">Email</label>
+                            <input type="email" class="form-control" id="email" name="email">
                         </div>
                         <div class="form-group">
-                            <label  class="form-label" for="password">Password</label>
-                            <input type="password"  class="form-control" id="password" name="password">
+                            <label class="form-label" for="password">Password</label>
+                            <input type="password" class="form-control" id="password" name="password">
                         </div>
                         <div class="form-group">
-                            <label  class="form-label" for="password-confirm">Confirm Password</label>
-                            <input  class="form-control" type="password" id="password-confirm" name="password_confirmation">
+                            <label class="form-label" for="password-confirm">Confirm Password</label>
+                            <input class="form-control" type="password" id="password-confirm" name="password_confirmation">
                         </div>
                         <div class="form-group">
-                            <label  class="form-label" for="main_image">Primary Image</label>
-                            <input  type="file"  class="form-control"  id="main_image" name="main_image">
+                            <label class="form-label" for="main_image">Primary Image</label>
+                            <input type="file" class="form-control" id="main_image" name="main_image">
                         </div>
+                        <div class="form-group">
+                            <select class="form-select" aria-label="Default select example" name="user_role" id="user_role">
+                                <option selected>Select this Role</option>
+                                <option value="user">user</option>
+                                <option value="admin">Admin</option>
+                            </select>
+                        </div>
+
                     </div>
                 </div>
                 <div class="modal-footer">

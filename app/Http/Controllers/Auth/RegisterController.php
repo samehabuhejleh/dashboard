@@ -8,6 +8,8 @@ use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
+use App\Models\Cart;
+
 class RegisterController extends Controller
 {
     /*
@@ -70,6 +72,11 @@ class RegisterController extends Controller
         ]);
 
         $user->addRole('user');
+
+        Cart::create([
+            'user_id'=>$user->id
+        ]);
+        
         $user->save();
         return $user;
     }

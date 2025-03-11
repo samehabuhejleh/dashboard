@@ -52,6 +52,7 @@ class UserController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'user_role' => ['required', 'string'],
         ]);
 
         try {
@@ -60,8 +61,8 @@ class UserController extends Controller
                 'email' => $request->email,
                 'password' => Hash::make($request->password)
             ]);
-
-            $user->addRole('user');
+             
+            $user->addRole($request->user_role);
 
 
             if ($request->hasFile('main_image')) {
@@ -130,7 +131,7 @@ class UserController extends Controller
 
         $image = $user->primaryImage()->first();
         if ($image) {
-            Storage::delete($image->path); // No need for `public_path()`
+            Storage::delete($image->path); 
             $image->delete();
         }
 
