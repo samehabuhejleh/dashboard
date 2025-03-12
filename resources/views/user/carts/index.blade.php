@@ -29,8 +29,8 @@
         </table>
 
         <div class="text-right">
-            <h4>Total: ${{ number_format($cart->items->sum(fn($item) => $item->pivot->quantity * $item->price), 2) }}</h4>
-            <a href="#" class="btn btn-success">Proceed to Checkout</a>
+            <h4>Total: {{$total}}</h4>
+            <a href="{{route('payment.form')}}" class="btn btn-success">Proceed to Checkout</a>
         </div>
     @else
         <p>Your cart is empty.</p>

@@ -19,4 +19,10 @@ class Cart extends Model
         ]);
     }
 
+
+
+    public function getTotal(){
+        return number_format($this->items->sum(fn($item) => $item->pivot->quantity * $item->price), 2);
+    }
+
 }

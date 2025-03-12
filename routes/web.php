@@ -11,6 +11,9 @@ use App\Http\Controllers\CartController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
+
+use App\Http\Controllers\PaymentController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -63,6 +66,12 @@ Route::prefix('admin')->as('admin.')->middleware(['admin'])->group(function () {
 });
 Route::prefix('user')->as('user.')->middleware(['user'])->group(function () {
     Route::get('/index', [UserDashboardController::class, 'index'])->name('index');
+    
 });
 
+Route::group(['middleware'=>'user'],function(){
 
+    Route::get('/checkout', [PaymentController::class, 'showCheckout'])->name('payment.form');
+    Route::post('/checkout', [PaymentController::class, 'processPayment'])->name('payment.process');
+    
+});

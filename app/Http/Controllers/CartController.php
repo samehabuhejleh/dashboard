@@ -26,7 +26,9 @@ class CartController extends Controller
 
             // Ensure the cart exists
             if (!$cart) {
-                return response()->json(['status' => false, 'message' => 'Cart not found'], 404);
+               $cart= Cart::create([
+                'user_id'=>Auth::user()->id
+               ]);
             }
 
             $product = Product::findOrFail($request->product_id);
@@ -71,6 +73,7 @@ class CartController extends Controller
     {
         $cart = Auth::user()->cart;
 
-        return view('user.carts.index', compact('cart'));
+        $total = $cart->getTotal();
+        return view('user.carts.index', compact('cart','total'));
     }
 }
