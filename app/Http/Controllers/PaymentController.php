@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Stripe\Stripe;
 use Stripe\Charge;
 use App\Http\Requests\CheckoutRequest;
+use App\Mail\OrderMail;
 use App\Models\Address;
 use App\Models\Cart;
 use App\Models\CartItemHistory;
@@ -14,6 +15,7 @@ use App\Models\CartItems;
 use App\Models\Order;
 use App\Models\Product;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 
 class PaymentController extends Controller
 {
@@ -76,7 +78,7 @@ class PaymentController extends Controller
                     $dcart->delete();
                 }
                 
-    
+                Mail::to($user->email)->send(new OrderMail($order));
                 return back()->with('success', 'تم الدفع بنجاح!');
             }
     
