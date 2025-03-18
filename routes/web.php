@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Auth;
 
 
 use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\SuperAdmin\OrderController as SuperOrderController;
 
 /*
 |--------------------------------------------------------------------------
@@ -51,6 +52,13 @@ Route::prefix('super-admin')->as('super.')->middleware(['super_admin'])->group(f
         Route::get('/edit/{id}', [ProductController::class, 'edit'])->name('edit');
         Route::put('/update/{id}', [ProductController::class, 'update'])->name('update');
         Route::delete('/delete/{id}', [ProductController::class, 'delete'])->name('delete');
+    });
+
+
+    Route::prefix('orders')->as('order.')->group(function () {
+        Route::get('/', [SuperOrderController::class, 'index'])->name('index');
+        Route::get('/edit/{id}', [SuperOrderController::class, 'edit'])->name('edit');
+        Route::put('/update/{id}', [SuperOrderController::class, 'update'])->name('update');
     });
 
     Route::prefix('users')->as('user.')->group(function () {

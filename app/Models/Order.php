@@ -16,11 +16,11 @@ class Order extends Model
     ];
 
     public function address(){
-        return $this->hasOne(Address::class,'address_id','id');
+        return $this->belongsTo(Address::class,'address_id','id');
     }
 
     public function user(){
-        return $this->hasOne(User::class,'user_id','id');
+        return $this->belongsTo(User::class,'user_id','id');
 
     }
 }
