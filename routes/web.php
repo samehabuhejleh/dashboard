@@ -8,12 +8,14 @@ use App\Http\Controllers\User\DashboardController as UserDashboardController;
 use App\Models\Product;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\ChatController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
 
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\SuperAdmin\OrderController as SuperOrderController;
+use Illuminate\Support\Facades\Broadcast;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,6 +27,7 @@ use App\Http\Controllers\SuperAdmin\OrderController as SuperOrderController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+Broadcast::routes(['middleware' => ['auth']]);
 
 Route::get('/',[HomeController::class,'welcome'])->name('welcome');
 
@@ -83,3 +86,11 @@ Route::group(['middleware'=>'user'],function(){
     Route::post('/checkout', [PaymentController::class, 'processPayment'])->name('payment.process');
     
 });
+
+Route::middleware('auth')->group(function () {
+    Route::post('/send-message', [ChatController::class, 'sendMessage']);
+    Route::get('/get-messages/{receiver_id}', [ChatController::class, 'getMessages']);
+    Route::get('/chat', [ChatController::class, 'index']);
+     
+});
+
