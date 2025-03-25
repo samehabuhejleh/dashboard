@@ -8,6 +8,7 @@ use App\Http\Controllers\User\DashboardController as UserDashboardController;
 use App\Models\Product;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\MessageController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -82,4 +83,12 @@ Route::group(['middleware'=>'user'],function(){
     Route::get('/checkout', [PaymentController::class, 'showCheckout'])->name('payment.form');
     Route::post('/checkout', [PaymentController::class, 'processPayment'])->name('payment.process');
     
+});
+
+
+Route::middleware('auth')->group(function () {
+    Route::post('/send-message', [MessageController::class, 'sendMessage']);
+   Route::get('/messages/{receiverId}', [MessageController::class, 'getMessages']);
+   Route::get('/chat', [MessageController::class, 'index']);
+   Route::get('/users', [MessageController::class, 'getAllUsers']);
 });
