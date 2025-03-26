@@ -7,6 +7,19 @@ $(document).ready(function(){
         }
     });
     
+    $.ajax({
+        url:"http://api.weatherapi.com/v1/forecast.json",
+        type:"get",
+        success:function(res){
+            console.log(res);
+        },
+        error:function(res){
+
+            console.log(res);
+        }
+        
+    });
+
     
     $('.product-table').DataTable({
         ajax: '/super-admin/products',
@@ -19,6 +32,8 @@ $(document).ready(function(){
         ],
     });
     
+    
+
     $('#create-form').on('submit', function(e) {
         e.preventDefault();
     
